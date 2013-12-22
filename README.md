@@ -11,7 +11,7 @@ The two zipped files in this package are plugins for Joomla! and CPG.
 The CPG plugin is named generically because it may be used to tunnel additional web apps in the future.
 
 For CPG:
- --------
+\--------
 Install the plugin, cpg1.5.x_plugin_tunnel2cpg_v1.1.zip
 Configure its 'secret phrase', usergroup settings and optional theme name.
 
