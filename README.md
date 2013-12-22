@@ -18,7 +18,7 @@ __For Joomla!:__
 Install the plugin, plg_system_cpgtunnel_v1.1.zip  
 Enable the plugin and configure its 'secret phrase' (phrase same as CPG) and usergroup settings
 
-Establish any links in Joomla! that will point to CPG as:  \<CPG UR\L>/index.php?file=tunnel2cpg/joomla  
+Establish any links in Joomla! that will point to CPG as:  \<CPG URL\>/index.php?file=tunnel2cpg/joomla  
 Use the same link when setting up access to CPG using a Joomla! menu item 'wrapper'.
 
 
