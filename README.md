@@ -10,13 +10,13 @@ version: 1.1
 The two zipped files in this package are plugins for Joomla! and CPG.
 The CPG plugin is named generically because it may be used to tunnel additional web apps in the future.
 
-For CPG:
-\--------
+For CPG:  
+\--------  
 Install the plugin, cpg1.5.x_plugin_tunnel2cpg_v1.1.zip
 Configure its 'secret phrase', usergroup settings and optional theme name.
 
-For Joomla!:
-------------
+For Joomla!:  
+\------------  
 Install the plugin, plg_system_cpgtunnel_v1.1.zip
 Enable the plugin and configure its 'secret phrase' (phrase same as CPG) and usergroup settings
 
@@ -24,8 +24,8 @@ Establish any links in Joomla! that will point to CPG as:  <CPG URL>/index.php?f
 Use the same link when setting up access to CPG using a Joomla! menu item 'wrapper'.
 
 
-NOTES:
-------
+NOTES:  
+\------  
 Joomla! users will have to logout and back in before a tunnel will be established.
 
 Once users have accessed the CPG instance via Joomla!, they will also be able to go directly to the
