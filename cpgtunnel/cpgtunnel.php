@@ -5,17 +5,11 @@ class plgSystemCpgTunnel extends JPlugin
 {
 	const J2CPG = 'joomla_2_cpg';
 
-	function __construct(&$subject, $config)
-	{
-		parent::__construct($subject, $config);
-	}
-
-
-	public function onUserLogin($user, $options = array())
+	public function onUserLogin ($user, $options = array())
 	{
 		if (JFactory::getApplication()->isSite()) {
 			// get plugin params
-			$plugin = &JPluginHelper::getPlugin('system','cpgtunnel');
+			$plugin = JPluginHelper::getPlugin('system','cpgtunnel');
 			$pParams = new JRegistry();
 			$pParams->loadString($plugin->params);
 			// get allowed groups
@@ -24,7 +18,7 @@ class plgSystemCpgTunnel extends JPlugin
 			$usrid = JUserHelper::getUserId($user['username']);
 			// and the groups they are in
 			$ugrps = JUserHelper::getUserGroups($usrid);
-			// see if htere is a match
+			// see if there is a match
 			$grpOk = array_intersect($allow, $ugrps);
 			if ($grpOk) {
 				$secret = $pParams->get('secret');
@@ -35,8 +29,8 @@ class plgSystemCpgTunnel extends JPlugin
 						."\0".$user['email']
 						."\0".$user['language']
 						;
-					$encrypt = convert_uuencode($this->doCrypt(false, $secret, $cookval));
-					setcookie(self::J2CPG, $encrypt, $options['remember'] ? time()+31536000 : 0, '/');
+					$encrypt = base64_encode($this->doCrypt(false, $secret, $cookval));
+					setcookie(self::J2CPG, $encrypt, (isset($options['remember']) && $options['remember']) ? time()+31536000 : 0, '/');
 					return true;
 				}
 			}
@@ -46,7 +40,7 @@ class plgSystemCpgTunnel extends JPlugin
 		return true;
 	}
 
-	public function onUserLogout($user, $options = array())
+	public function onUserLogout ($user, $options = array())
 	{
 		if (JFactory::getApplication()->isSite()) {
 			// clear the cookie
@@ -55,7 +49,7 @@ class plgSystemCpgTunnel extends JPlugin
 		return true;
 	}
 
-	public function onAfterInitialise()
+	public function onAfterInitialise ()
 	{
 		if (JFactory::getApplication()->isSite() && !JFactory::getUser()->id) {
 			// clear the cookie
@@ -64,7 +58,7 @@ class plgSystemCpgTunnel extends JPlugin
 		return true;
 	}
 
-	private function doCrypt($de,$pass,$dat)
+	private function doCrypt ($de, $pass, $dat)
 	{
 		$td = mcrypt_module_open(MCRYPT_3DES, '', MCRYPT_MODE_ECB, '');
 		$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_DEV_RANDOM);

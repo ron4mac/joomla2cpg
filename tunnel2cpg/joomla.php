@@ -7,14 +7,14 @@ require_once './plugins/tunnel2cpg/initialize.inc.php';
 $joomlaTunnel_result = joomlaTunnel_getCredentials();
 cpgRedirectPage('index.php', 'CAPTION', $lang_plugin_tunnel2cpg['authfail'].$lang_plugin_tunnel2cpg[$joomlaTunnel_result], 0, 'warning');
 
-function joomlaTunnel_getCredentials()
+function joomlaTunnel_getCredentials ()
 {
-	global $CONFIG, $superCage, $cpg_udb;
+	global $CONFIG, $USER, $superCage, $cpg_udb;
 	$secret = $CONFIG['tunnel2cpg_secret'];
 	$theme = $CONFIG['tunnel2cpg_theme'];
 	$hdrloc = 'Location: index.php' . ($theme ? "?theme={$theme}": '') . "\n\n";
 	if (!$secret) return 'nosecret';
-	$usercred = joomlaTunnel_doCrypt(true, $secret, convert_uudecode($superCage->cookie->getRaw('joomla_2_cpg')));
+	$usercred = joomlaTunnel_doCrypt(true, $secret, base64_decode($superCage->cookie->getRaw('joomla_2_cpg')));
 	if (!$usercred) {
 		$cpg_udb->logout();
 		header($hdrloc);
@@ -26,6 +26,9 @@ function joomlaTunnel_getCredentials()
 	if ($uid != USER_ID) {
 		if (!$cpg_udb->login($u, $p, 0)) return 'nologin';
 	}
+	// mark that the user logged via the tunnel for untunneling
+	$USER['joom2cpg'] = 1;
+	user_save_profile();
 	header($hdrloc);
 	exit;
 }
@@ -40,7 +43,7 @@ function joomlaTunnel_createUserIfNeeded ($user, $pass, $email, $lang)
 		$user_id = mysql_insert_id();
 		log_write('New user "'.$user_name.'" created', CPG_ACCESS_LOG);
 
-		// Create a personal album if corresponding option is enabled
+		// create a personal album if corresponding option is enabled
 		if ($CONFIG['personal_album_on_registration'] == 1) {
 			$catid = $user_id + FIRST_USER_CAT;
 			cpg_db_query("INSERT INTO {$CONFIG['TABLE_ALBUMS']} (`title`, `category`, `owner`) VALUES ('$user', $catid, $user_id)");
@@ -49,7 +52,7 @@ function joomlaTunnel_createUserIfNeeded ($user, $pass, $email, $lang)
 	return $user_id;
 }
 
-function joomlaTunnel_doCrypt($de,$pass,$dat)
+function joomlaTunnel_doCrypt ($de, $pass, $dat)
 {
 	$td = mcrypt_module_open(MCRYPT_3DES, '', MCRYPT_MODE_ECB, '');
 	$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_DEV_RANDOM);
@@ -62,5 +65,3 @@ function joomlaTunnel_doCrypt($de,$pass,$dat)
 	mcrypt_module_close($td);
 	return $retdat;
 }
-
-?>

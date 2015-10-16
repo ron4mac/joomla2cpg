@@ -11,4 +11,3 @@ function tunnel2cpg_language() {
 }
 
 tunnel2cpg_language();
-?>

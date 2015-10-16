@@ -21,7 +21,7 @@ tunnel2cpg_display_form();
 
 /***************************************************************************/
 
-function tunnel2cpg_display_form()
+function tunnel2cpg_display_form ()
 {
 	global $CONFIG, $lang_common, $lang_gallery_admin_menu, $lang_plugin_tunnel2cpg;
 	echo '<form action="index.php?file=tunnel2cpg/config" method="post">';
@@ -41,35 +41,35 @@ function tunnel2cpg_display_form()
 
 	$submit_icon = cpg_fetch_icon('ok', 1);
 	echo <<<EOT
-		<tr>
-			<td class="tableb">
-				{$lang_plugin_tunnel2cpg['secret']}
-			</td>
-			<td class="tableb">
-				<input type="text" name="secret" value="{$secret}" />
-			</td>
-		</tr>
-		<tr>
-			<td class="tableb">
-				{$lang_plugin_tunnel2cpg['add2group']}
-			</td>
-			<td class="tableb">
-				<select class="listbox" name="add2group">{$group_opt}</select>
-			</td>
-		</tr>
-		<tr>
-			<td class="tableb">
-				{$lang_plugin_tunnel2cpg['theme']}
-			</td>
-			<td class="tableb">
-				<input type="text" name="theme" value="{$theme}" />
-			</td>
-		</tr>
-		<tr>
-			<td class="tableb" colspan="2" style="text-align:center">
-				<br /><button value="{$lang_common['apply_changes']}" name="submit" class="button" type="submit">{$submit_icon}{$lang_common['apply_changes']}</button>
-			</td>
-		</tr>
+	<tr>
+		<td class="tableb">
+			{$lang_plugin_tunnel2cpg['secret']}
+		</td>
+		<td class="tableb">
+			<input type="text" name="secret" value="{$secret}" />
+		</td>
+	</tr>
+	<tr>
+		<td class="tableb">
+			{$lang_plugin_tunnel2cpg['add2group']}
+		</td>
+		<td class="tableb">
+			<select class="listbox" name="add2group">{$group_opt}</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="tableb">
+			{$lang_plugin_tunnel2cpg['theme']}
+		</td>
+		<td class="tableb">
+			<input type="text" name="theme" value="{$theme}" />
+		</td>
+	</tr>
+	<tr>
+		<td class="tableb" colspan="2" style="text-align:center">
+			<br /><button value="{$lang_common['apply_changes']}" name="submit" class="button" type="submit">{$submit_icon}{$lang_common['apply_changes']}</button>
+		</td>
+	</tr>
 EOT;
 	endtable();
 
@@ -80,7 +80,7 @@ EOT;
 	pagefooter();
 }
 
-function tunnel2cpg_process_form()
+function tunnel2cpg_process_form ()
 {
 	global $CONFIG, $superCage, $lang_common, $lang_plugin_tunnel2cpg;
 	if ($superCage->post->keyExists('secret')) {
@@ -95,14 +95,12 @@ function tunnel2cpg_process_form()
 
 	starttable('100%', $lang_common['information']);
 	echo <<<EOT
-		<tr>
-			<td class="tableb" width="200">
-				{$lang_plugin_tunnel2cpg['saved']}
-			</td>
-		</tr>
+	<tr>
+		<td class="tableb" width="200">
+			{$lang_plugin_tunnel2cpg['saved']}
+		</td>
+	</tr>
 EOT;
 	endtable();
 	echo '<br />';
 }
-
-?>

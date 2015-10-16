@@ -1,6 +1,21 @@
 <?php
 if (!defined('IN_COPPERMINE')) die('Not in Coppermine...');
 
+// if there is no joomla_2_cpg cookie and the user had logged in via the tunnel, log them out
+function tunnel2cpg_unTunnel () {
+	global $CONFIG, $superCage;
+	if (!isset($superCage->cookie->_source['joomla_2_cpg'])) {
+		$cookn = $CONFIG['cookie_name'].'_data';
+		$uProf = @unserialize(@base64_decode($superCage->cookie->getRaw($cookn)));
+		if (isset($uProf['joom2cpg'])) {
+			$client_id = md5($superCage->server->getRaw('HTTP_USER_AGENT').$CONFIG['site_url']);
+			unset($superCage->cookie->_source[$client_id]);
+			setcookie ($client_id, '', time() - 3600, $CONFIG['cookie_path']);
+			unset($superCage->cookie->_source[$cookn]);
+		}
+	}
+}
+tunnel2cpg_unTunnel();
 
 /*** INSTALL/UNINSTALL ***/
 
@@ -21,5 +36,3 @@ function tunnel2cpg_uninstall () {
 	cpg_db_query("DELETE FROM {$CONFIG['TABLE_CONFIG']} WHERE name = 'tunnel2cpg_theme'");
 	return true;
 }
-
-?>

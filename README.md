@@ -5,17 +5,17 @@ A pair of plugins for Joomla! and Coppermine Photo Gallery providing user synchr
 
 
 **Joomla! to Coppermine Photo Gallery Tunnel**
-version: 1.1
+version: 1.2
 
 The two zipped files in this package are plugins for Joomla! and CPG.
 The CPG plugin is named generically because it may be used to tunnel additional web apps in the future.
 
 __For CPG:__  
-Install the plugin, cpg1.5.x_plugin_tunnel2cpg_v1.1.zip  
+Install the plugin, cpg1.5.x_plugin_tunnel2cpg_v1.2.zip  
 Configure its 'secret phrase', usergroup settings and optional theme name.
 
 __For Joomla!:__  
-Install the plugin, plg_system_cpgtunnel_v1.1.zip  
+Install the plugin, plg_system_cpgtunnel_v1.2.zip  
 Enable the plugin and configure its 'secret phrase' (phrase same as CPG) and usergroup settings
 
 Establish any links in Joomla! that will point to CPG as:  \<CPG URL\>/index.php?file=tunnel2cpg/joomla  
