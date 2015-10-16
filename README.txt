@@ -21,7 +21,7 @@ Use the same link when setting up access to CPG using a Joomla! menu item 'wrapp
 NOTES:
 ------
 Joomla! users will have to logout and back in before a tunnel will be established.
-Subsequently, when users logout from Joomla!, they will also be logged out from CPG.
+Subsequently, when users logout from Joomla!, they will also be logged out of CPG.
 
 Once users have accessed the CPG instance via Joomla!, they will also be able to go directly to the
 CPG instance (<CPG URL>) and login with their same Joomla! username and password.
