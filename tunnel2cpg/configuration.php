@@ -8,7 +8,7 @@ $name = $lang_plugin_tunnel2cpg['tunnel2cpg'];
 $description = $lang_plugin_tunnel2cpg['plug_desc'];
 
 $author='Ron Crans';
-$version='1.2';
+$version='1.2.5';
 $plugin_cpg_version = array('min' => '1.5');
 $extra_info = '<a href="index.php?file=tunnel2cpg/config" class="admin_menu">'.cpg_fetch_icon('config', 1)."$name {$lang_gallery_admin_menu['admin_lnk']}</a>";
 $install_info = $lang_plugin_tunnel2cpg['plug_info'];

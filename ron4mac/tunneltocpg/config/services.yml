@@ -1,0 +1,14 @@
+services:
+    ron4mac.tunneltocpg.controller:
+        class: ron4mac\tunneltocpg\controller\main
+        arguments:
+            - @config
+            - @controller.helper
+            - @template
+            - @user
+    ron4mac.tunneltocpg.listener:
+        class: ron4mac\tunneltocpg\event\listener
+        arguments:
+            - @config
+        tags:
+            - { name: event.listener }

@@ -1,0 +1,3 @@
+ron4mac_tunneltocpg_controller:
+    path: /tunneltocpg/{name}
+    defaults: { _controller: ron4mac.tunneltocpg.controller:handle }

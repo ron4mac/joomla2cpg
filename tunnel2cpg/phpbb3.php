@@ -4,36 +4,36 @@ ini_set('display_errors', '1');
 
 require_once './plugins/tunnel2cpg/initialize.inc.php';
 
-$joomlaTunnel_result = joomlaTunnel_getCredentials();
-cpgRedirectPage('index.php', 'CAPTION', $lang_plugin_tunnel2cpg['authfail'].$lang_plugin_tunnel2cpg[$joomlaTunnel_result], 0, 'warning');
+$phpbbTunnel_result = phpbbTunnel_getCredentials();
+cpgRedirectPage('index.php', 'CAPTION', $lang_plugin_tunnel2cpg['authfail'].$lang_plugin_tunnel2cpg[$phpbbTunnel_result], 0, 'warning');
 
-function joomlaTunnel_getCredentials ()
+function phpbbTunnel_getCredentials ()
 {
 	global $CONFIG, $USER, $superCage, $cpg_udb;
 	$secret = $CONFIG['tunnel2cpg_secret'];
 	$theme = $CONFIG['tunnel2cpg_theme'];
 	$hdrloc = 'Location: index.php' . ($theme ? "?theme={$theme}": '') . "\n\n";
-	if (!$secret) return 'nosecret';
-	$usercred = joomlaTunnel_doCrypt(true, $secret, base64_decode($superCage->cookie->getRaw('joomla_2_cpg')));
+	if (!$secret) return 'nosecret';	$secret = 'My Secret Phrase';
+	$usercred = phpbbTunnel_doCrypt(true, $secret, base64_decode($superCage->cookie->getRaw('phpbb_2_cpg')));
 	if (!$usercred) {
 		$cpg_udb->logout();
 		header($hdrloc);
 		exit;
 	}
-	list($s, $u, $p, $e, $l) = preg_split('/\0/',$usercred);
+	list($s, $u, $p, $e, $l) = preg_split('/\0/',$usercred);	//var_dump($s, $u, $p, $e, $l);exit();
 	if ($s != 'T2CPG') return 'nosentinal';
-	$uid = joomlaTunnel_createUserIfNeeded($u, $p, $e, $l);
+	$uid = phpbbTunnel_createUserIfNeeded($u, $p, $e, $l);
 	if ($uid != USER_ID) {
 		if (!$cpg_udb->login($u, $p, 0)) return 'nologin';
 	}
 	// mark that the user logged in via the tunnel for untunneling
-	$USER['tunnel2cpg'] = 'joomla';
+	$USER['tunnel2cpg'] = 'phpbb';
 	user_save_profile();
 	header($hdrloc);
 	exit;
 }
 
-function joomlaTunnel_createUserIfNeeded ($user, $pass, $email, $lang)
+function phpbbTunnel_createUserIfNeeded ($user, $pass, $email, $lang)
 {
 	global $CONFIG;
 	$user_id = get_userid($user);
@@ -52,7 +52,7 @@ function joomlaTunnel_createUserIfNeeded ($user, $pass, $email, $lang)
 	return $user_id;
 }
 
-function joomlaTunnel_doCrypt ($de, $pass, $dat)
+function phpbbTunnel_doCrypt ($de, $pass, $dat)
 {
 	$td = mcrypt_module_open(MCRYPT_3DES, '', MCRYPT_MODE_ECB, '');
 	$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_DEV_RANDOM);
