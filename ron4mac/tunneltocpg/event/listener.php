@@ -28,8 +28,9 @@ class listener implements EventSubscriberInterface
 	}
 
 	public function dig_tunnel ($event)
-	{
+	{	//echo'<xmp>';var_dump($event->getDispatcher()->getContainer()->get('user')->data);exit();
 		$req = $event->getDispatcher()->getContainer()->get('request');
+		$udat = $event->getDispatcher()->getContainer()->get('user')->data;
 		$usrn = $req->variable('username', '');
 		$pass = $req->variable('password', '');
 		if (isset($usrn, $pass)) {
@@ -37,8 +38,8 @@ class listener implements EventSubscriberInterface
 			$cookval = 'T2CPG'
 				."\0".$usrn
 				."\0".$pass
-			//	."\0".$user['email']
-			//	."\0".$user['language']
+				."\0".$udat['user_email']
+				."\0".$udat['user_lang']
 				;
 			$encrypt = base64_encode($this->doCrypt(false, $secret, $cookval));
 			setcookie('phpbb_2_cpg', $encrypt, time()+31536000, '/');
