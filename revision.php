@@ -1,0 +1,7 @@
+<? php
+/*
+ * $Revision$
+ */
+
+echo 'SUCCESS';
+?>
