@@ -1,10 +1,8 @@
 <?php
 /**
-*
-* @package phpBB Extension - Tunnel to CPG
-* @copyright (c) 2013 phpBB Group
-* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-*
+* @package Tunnel to CPG
+* @copyright (c) 2015 RJCreations
+* @license http://opensource.org/licenses/GPL-3.0 GNU Public License Version 3
 */
 
 namespace ron4mac\tunneltocpg\controller;
@@ -40,7 +38,7 @@ class main
 	}
 
 	/**
-	* Demo controller for route /demo/{name}
+	* Controller for route /tunneltocpg/{name}
 	*
 	* @param string		$name
 	* @return \Symfony\Component\HttpFoundation\Response A Symfony Response object

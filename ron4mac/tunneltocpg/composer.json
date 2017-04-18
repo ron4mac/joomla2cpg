@@ -3,8 +3,8 @@
     "type": "phpbb-extension",
     "description": "Adds user synchronisation between phpBB and Coppermine Photo Gallery",
     "homepage": "",
-    "version": "1.0.0",
-    "time": "2015-10-16",
+    "version": "1.1b",
+    "time": "2017-04-18",
     "license": "GPL-3.0",
     "authors": [
         {

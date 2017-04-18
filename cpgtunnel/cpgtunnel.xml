@@ -3,10 +3,10 @@
 	<name>PLG_SYSTEM_CPGTUNNEL</name>
 	<author>Ron Crans</author>
 	<creationDate>October 2014</creationDate>
-	<copyright>Copyright (C) 2014 Ron Crans. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2014-2017 RJCreations. All rights reserved.</copyright>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>ron@rjconline.net</authorEmail>
-	<version>1.2</version>
+	<version>1.3.2</version>
 	<description>PLG_SYSTEM_CPGTUNNEL_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="cpgtunnel">cpgtunnel.php</filename>
@@ -20,6 +20,11 @@
 				label="PLG_SYSTEM_CPGTUNNEL_SECRET_LABEL" description="PLG_SYSTEM_CPGTUNNEL_SECRET_DESC" />
 				<field name="groups" type="usergroup" size="4" default="2" multiple="true"
 				label="PLG_SYSTEM_CPGTUNNEL_USERG_LABEL" description="PLG_SYSTEM_CPGTUNNEL_USERG_DESC" />
+				<field name="encrm" type="list" default="o"
+				label="PLG_SYSTEM_CPGTUNNEL_ENCRM_LABEL" description="PLG_SYSTEM_CPGTUNNEL_ENCRM_DESC">
+					<option value="o">OpenSSL</option>
+					<option value="m">MCrypt</option>
+				</field>
 			</fieldset>
 		</fields>
 	</config>

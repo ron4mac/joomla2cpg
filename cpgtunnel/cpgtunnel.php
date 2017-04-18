@@ -29,7 +29,7 @@ class plgSystemCpgTunnel extends JPlugin
 						."\0".$user['email']
 						."\0".$user['language']
 						;
-					$encrypt = base64_encode($this->doCrypt(false, $secret, $cookval));
+					$encrypt = $this->enCrypt($secret, $cookval, $pParams->get('encrm'));
 					setcookie(self::J2CPG, $encrypt, (isset($options['remember']) && $options['remember']) ? time()+31536000 : 0, '/');
 					return true;
 				}
@@ -58,7 +58,20 @@ class plgSystemCpgTunnel extends JPlugin
 		return true;
 	}
 
-	private function doCrypt ($de, $pass, $dat)
+	private function enCrypt ($pass, $dat, $mth)
+	{
+		switch ($mth) {
+			case 'm':
+				return base64_encode($this->mc_crypt(false, $b64d, $pass));
+				break;
+			case 'o':
+			default:
+				return $this->os_encrypt($dat, $pass);
+				break;
+		}
+	}
+
+	private function mc_crypt ($de, $dat, $pass)
 	{
 		$td = mcrypt_module_open(MCRYPT_3DES, '', MCRYPT_MODE_ECB, '');
 		$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_DEV_RANDOM);
@@ -70,6 +83,26 @@ class plgSystemCpgTunnel extends JPlugin
 		mcrypt_generic_deinit($td);
 		mcrypt_module_close($td);
 		return $retdat;
+	}
+
+	const CIPHER = 'aes-256-ctr';
+
+	private function os_encrypt ($message, $key)
+	{
+		$nonceSize = openssl_cipher_iv_length(self::CIPHER);
+		$nonce = openssl_random_pseudo_bytes($nonceSize);
+		$ciphertext = openssl_encrypt($message, self::CIPHER, $key, OPENSSL_RAW_DATA, $nonce);
+		return base64_encode($nonce.$ciphertext);
+	}
+
+	private function os_decrypt ($message, $key)
+	{
+		$message = base64_decode($message);
+		$nonceSize = openssl_cipher_iv_length(self::CIPHER);
+		$nonce = mb_substr($message, 0, $nonceSize, '8bit');
+		$ciphertext = mb_substr($message, $nonceSize, null, '8bit');
+		$plaintext = openssl_decrypt($ciphertext, self::CIPHER, $key, OPENSSL_RAW_DATA, $nonce);
+		return $plaintext;
 	}
 
 }

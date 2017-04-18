@@ -1,10 +1,8 @@
 <?php
 /**
-*
 * @package Tunnel to CPG
-* @copyright (c) 2015 ron4mac
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
+* @copyright (c) 2015 RJCreations
+* @license http://opensource.org/licenses/GPL-3.0 GNU Public License Version 3
 */
 
 /**
@@ -37,21 +35,17 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'ERROR_LOGIN_ATTEMPTS'			=> '<strong>User has exceeded the login attempts</strong>',
-	'ERROR_LOGIN_PASSWORD'			=> '<strong>The user entered an incorrect password</strong>',
-	'ERROR_LOGIN_PASSWORD_CONVERT'	=> '<strong>Password convert error</strong>',
-	'ERROR_LOGIN_UNKNOWN'			=> '<strong>An unexpected login error (%1$s) occurred</strong><br />» %2$s',
-	'ERROR_LOGIN_USERNAME'			=> '<strong>Invalid username has been entered</strong><br />» %1$s',
+	'TUNNELTOCPG_PAGE'					=> 'TunnelToCPG',
+	'TUNNELTOCPG_HELLO'					=> 'Hello %s!',
+	'TUNNELTOCPG_GOODBYE'				=> 'Goodbye %s!',
 
-	'FAILED_LOGINS'					=> 'Log failed user logins',
-	'FAILED_LOGINS_EXPLAIN'			=> 'Add an entry into the User or Admin logs when a user fails to login.',
-
-	'TUNNELTOCPG_PAGE'			=> 'TunnelToCPG',
-	'TUNNELTOCPG_HELLO'		=> 'Hello %s!',
-	'TUNNELTOCPG_GOODBYE'		=> 'Goodbye %s!',
-
-	'ACP_TUNNELTOCPG_TITLE'			=> 'TunnelToCPG Module',
+	'ACP_TUNNELTOCPG_TITLE'				=> 'TunnelToCPG Module',
 	'ACP_TUNNELTOCPG'					=> 'Settings',
 	'ACP_TUNNELTOCPG_SECRET'			=> 'Secret Phrase',
-	'ACP_TUNNELTOCPG_SETTING_SAVED'	=> 'Settings have been saved successfully!',
+	'ACP_TUNNELTOCPG_SECRET_EXPLAIN'	=> 'The same secret phrase must be set in the CPG plugin.',
+	'ACP_TUNNELTOCPG_GROUPS'			=> 'User Group(s) to Tunnel',
+	'ACP_TUNNELTOCPG_GROUPS_EXPLAIN'	=> 'Select the groups for which a CPG tunnel should be created.',
+	'ACP_TUNNELTOCPG_ENCRM'				=> 'Tunnel Encryption Method',
+	'ACP_TUNNELTOCPG_ENCRM_EXPLAIN'		=> 'The same encryption method must be set in the CPG plugin.',
+	'ACP_TUNNELTOCPG_SETTING_SAVED'		=> 'Settings have been saved successfully!'
 ));

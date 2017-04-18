@@ -1,10 +1,8 @@
 <?php
 /**
-*
 * @package Tunnel to CPG
-* @copyright (c) 2015 ron4mac
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
+* @copyright (c) 2015 RJCreations
+* @license http://opensource.org/licenses/GPL-3.0 GNU Public License Version 3
 */
 
 /**

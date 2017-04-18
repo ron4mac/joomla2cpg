@@ -5,12 +5,30 @@
 <form id="acp_board" method="post" action="{U_ACTION}">
 	<fieldset>
 		<dl>
-			<dt><label for="ron4mac_tunneltocpg_secret">{L_ACP_TUNNELTOCPG_SECRET}</label></dt>
+			<dt><label for="ron4mac_tunneltocpg_secret">{L_ACP_TUNNELTOCPG_SECRET}{L_COLON}</label><br /><span>{L_ACP_TUNNELTOCPG_SECRET_EXPLAIN}</span></dt>
 			<dd>
 				<input type="text" class="text" name="ron4mac_tunneltocpg_secret" value="{RON4MAC_TUNNELTOCPG_SECRET}" />
 			</dd>
 		</dl>
-
+		<dl>
+			<dt><label for="ron4mac_tunneltocpg_groups">{L_ACP_TUNNELTOCPG_GROUPS}{L_COLON}</label><br /><span>{L_ACP_TUNNELTOCPG_GROUPS_EXPLAIN}</span></dt>
+			<dd>
+				<select name="ron4mac_tunneltocpg_groups[]" id="ron4mac_tunneltocpg_groups" size="4" multiple="multiple">
+					<!-- BEGIN groups -->
+						<option value="{groups.GROUP_ID}"<!-- IF groups.S_SELECTED --> selected="selected"<!-- ENDIF -->>{groups.GROUP_NAME}</option>
+					<!-- END groups -->
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="ron4mac_tunneltocpg_encrm">{L_ACP_TUNNELTOCPG_ENCRM}{L_COLON}</label><br /><span>{L_ACP_TUNNELTOCPG_ENCRM_EXPLAIN}</span></dt>
+			<dd>
+				<select name="ron4mac_tunneltocpg_encrm" id="ron4mac_tunneltocpg_encrm">
+					<option value="o"<!-- IF RON4MAC_TUNNELTOCPG_ENCRM_O --> selected="selected"<!-- ENDIF -->>OpenSSL</option>
+					<option value="m"<!-- IF RON4MAC_TUNNELTOCPG_ENCRM_M --> selected="selected"<!-- ENDIF -->>MCrypt</option>
+				</select>
+			</dd>
+		</dl>
 		<p class="submit-buttons">
 			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
 			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
